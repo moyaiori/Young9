@@ -75,8 +75,17 @@ $(function(){
 		$("#loginModal").modal();
 	});
 	
-	$("#logout").click(function(){
-		$(location).attr('href', "../member/logout");
+	$("#logout").click(function(){	
+		$.ajax({
+			type : "get",
+			url : "../member/logout",
+			success : function(data) {
+				$(location).attr('href', "/");
+			},
+			error : function(data){
+			
+			}
+		});
 	});
 });
 </script>

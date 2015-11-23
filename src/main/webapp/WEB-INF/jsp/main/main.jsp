@@ -45,23 +45,23 @@
 	}
 		
 	$(function(){
-		setInterval("rotateImages()", 2000);	
+		setInterval("rotateImages()", 5000);	
 	});
 	
 	</script>
 	<body>
 		<div id="photoShow">
 			<div class="current">
-				<a href="http://larissafranz.tumblr.com"><img src="../images/main1.jpg"  style="width:1000px; height:590px;" alt="Photo gallery01" ></a>
+				<img src="../images/main1.jpg"  style="width:1000px; height:590px;" alt="Photo gallery01" >
 			</div>
 			<div>
-				<a href="http://larissafranz.tumblr.com"><img src="../images/main2.jpg"  style="width:1000px; height:590px;"alt="Photo gallery02"></a>
+				<img src="../images/main2.jpg"  style="width:1000px; height:590px;"alt="Photo gallery02">
 			</div>	
 			<div>
-				<a href="http://larissafranz.tumblr.com"><img src="../images/main3.jpg"  style="width:1000px; height:590px;"alt="Photo gallery03"></a>
+				<img src="../images/main3.jpg"  style="width:1000px; height:590px;"alt="Photo gallery03">
 			</div>
 			<div>
-				<a href="http://larissafranz.tumblr.com"><img src="../images/main4.jpg" style="width:1000px; height:590px;" alt="Photo gallery04"></a>
+				<img src="../images/main4.jpg" style="width:1000px; height:590px;" alt="Photo gallery04">
 			</div>
 			
 	

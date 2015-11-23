@@ -22,7 +22,6 @@
 					<col width="100" />
 					<col width="200" />
 				</colgroup>
-				
 			<tr>
 				<td style="text-align:center; vertical-align: middle; font-size: 14px; font-weight:bold">Email</td>
 				<td>${member.email }메일주소동적받아오기</td>

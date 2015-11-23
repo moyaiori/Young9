@@ -50,14 +50,13 @@ public class MemberController {
 
 	/*로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(Model model, HttpServletResponse response, String email, String passwd){
+	public @ResponseBody String login(Model model, HttpServletResponse response, String email, String passwd){
 		
 		Member member = memberService.login(email, passwd);
-		System.out.println(member);
-		
 		Cookie cookie = null;
 		try {
 			cookie = new Cookie("loginInfo", email+"," + URLEncoder.encode(member.getNickname(),"utf-8"));
+		
 		} catch (UnsupportedEncodingException e) {
 			logger.debug("[DEBUG] : " + e.toString());
 			e.printStackTrace();
@@ -67,7 +66,7 @@ public class MemberController {
 		response.addCookie(cookie);
 		
 		model.addAttribute("contentFile", "../main/main.jsp");
-		return "template/template";
+		return "redirect:/";
 	}
 
     /*회원가입 */
@@ -78,10 +77,11 @@ public class MemberController {
  
        return "회원이 되신걸 환영합니다.";
     }
-
+    
+    /*로그아웃*/
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model, HttpServletRequest request, HttpServletResponse response){
-		
+	public  String logout(Model model, HttpServletRequest request, HttpServletResponse response){
+		 
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null){
 			for (Cookie cookie : cookies) {
@@ -92,9 +92,9 @@ public class MemberController {
 				}
 			}			
 		}
-		
-		model.addAttribute("contentFile", "../main/main.jsp");	
-		return "/template/template";
+		logger.debug("[logout] 컨트롤러 접속");
+		/*model.addAttribute("contentFile", "../main/main.jsp");	*/
+		return "redirect:/"; 
 	}
 	
 	

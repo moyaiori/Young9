@@ -9,8 +9,7 @@ package kr.or.kosta.binning.young9.member.domain;
 
 /** 사용자 정보 저장을 위한 도메인 객체 */
 public class Member {
-   private String email;
-   private String email1;
+	private String email;
     private String nickname;
     private String name;
     private String passwd;
@@ -62,15 +61,6 @@ public class Member {
      this.testName = testName;
   }
 
-
-
-   public String getEmail1() {
-      return email1;
-   }
-
-   public void setEmail1(String email1) {
-      this.email1 = email1;
-   }
 
    public String getEmail() {
       return email;
@@ -167,13 +157,13 @@ public class Member {
    public void setStudyGroupId(int studyGroupId) {
       this.studyGroupId = studyGroupId;
    }
-   
 	@Override
 	public String toString() {
-		return "Member [email=" + email + ", email1=" + email1 + ", nickname=" + nickname + ", name=" + name + ", passwd="
-				+ passwd + ", phoneNumber=" + phoneNumber + ", phoneNumber2=" + phoneNumber2 + ", phoneNumber3="
-				+ phoneNumber3 + ", introdution=" + introdution + ", birth=" + birth + ", targetScore=" + targetScore
-				+ ", testName=" + testName + ", studyGroupId=" + studyGroupId + "]";
+		return "Member [email=" + email + ", nickname=" + nickname + ", name=" + name + ", passwd=" + passwd
+				+ ", phoneNumber=" + phoneNumber + ", phoneNumber2=" + phoneNumber2 + ", phoneNumber3=" + phoneNumber3
+				+ ", introdution=" + introdution + ", birth=" + birth + ", targetScore=" + targetScore + ", testName="
+				+ testName + ", studyGroupId=" + studyGroupId + "]";
 	}
+	  
    
 }

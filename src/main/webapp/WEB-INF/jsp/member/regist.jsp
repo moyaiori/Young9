@@ -10,84 +10,83 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
-  var elmSelect = $('#email3');
-  var elmTarget = $('#email1');
+  		var elmSelect = $('#email3');
+ 		var elmTarget = $('#email1');
   
-  elmSelect.bind('change', null, function() {
+ 		elmSelect.bind('change', null, function() {
    
-   var host = this.value;
-   if (host != 'etc' && host != '') {
-    elmTarget.attr('readonly', true);
-    elmTarget.val(host).change();
-   }else if (host == 'etc') {
-    elmTarget.attr('readonly', false);
-    elmTarget.val('').change();
-    elmTarget.focus();
-   } else {
-    elmTarget.attr('readonly', true);
-    elmTarget.val('').change();
-   }
-  });
+   		var host = this.value;
+   		if (host != 'etc' && host != '') {
+   			elmTarget.attr('readonly', true);
+    		elmTarget.val(host).change();
+   		}else if (host == 'etc') {
+  			elmTarget.attr('readonly', false);
+    		elmTarget.val('').change();
+    		elmTarget.focus();
+   		} else {
+    		elmTarget.attr('readonly', true);
+    		elmTarget.val('').change();
+  		 }
+ 	 });
   
-  var elmSelectLang = $('#lang1');
-  var elmTargetLang = $('#lang2');
+  	var elmSelectLang = $('#lang1');
+  	var elmTargetLang = $('#lang2');
   
-  elmSelectLang.bind('change', null, function() {
+  	elmSelectLang.bind('change', null, function() {
    
-   var host = this.value;
-   if (host != 'etc' && host != '') {
-    elmTargetLang.attr('readonly', true);
-    elmTargetLang.val(host).change();
-   }else if (host == 'etc') {
-    elmTargetLang.attr('readonly', false);
-    elmTargetLang.val('').change();
-    elmTargetLang.focus();
-   } else {
-    elmTargetLang.attr('readonly', true);
-    elmTargetLang.val('').change();
-   }
-  });
- });
+	  	var host = this.value;
+	   	if (host != 'etc' && host != '') {
+	    	elmTargetLang.attr('readonly', true);
+	    	elmTargetLang.val(host).change();
+	   	}else if (host == 'etc') {
+	    	elmTargetLang.attr('readonly', false);
+	    	elmTargetLang.val('').change();
+	    	elmTargetLang.focus();
+	   	} else {
+	    	elmTargetLang.attr('readonly', true);
+	    	elmTargetLang.val('').change();
+	  	}
+	 	});
+ 	});
     
- $(function(){
-  $("#joinBtn").click(function(event){
-   
-   var email = $("#eamil0").val()+"@"+$("#email1").val();
-   var nickname = $("#nickname").val();
-   var name= $("#name").val();
-   var passwd = $("#pa1").val();
-   var phoneNumber = $("#phoneNumber").val();
-   var phoneNumber2= $("#phoneNumber2").val();
-   var phoneNumber3= $("#phoneNumber3").val();
-   var introdution= $("#introdution").val();
-   var birth= $("#birth").val();
-   var targetScore= $("#targetScore").val();
-   var testName= $("#lang2").val();
-   
-   
-    var info = {email:email, passwd:passwd,
-      nickname:nickname, name:name,
-      passwd:passwd,phoneNumber:phoneNumber,
-      phoneNumber2:phoneNumber2,phoneNumber3:phoneNumber3,
-      introdution:introdution,birth:birth,
-      targetScore:targetScore,testName:testName
-   };
+	 $(function(){
+		  $("#joinBtn").click(function(event){
+		   
+		   var email = $("#eamil0").val()+"@"+$("#email1").val();
+		   var nickname = $("#nickname").val();
+		   var name= $("#name").val();
+		   var passwd = $("#pa1").val();
+		   var phoneNumber = $("#phoneNumber").val();
+		   var phoneNumber2= $("#phoneNumber2").val();
+		   var phoneNumber3= $("#phoneNumber3").val();
+		   var introdution= $("#introdution").val();
+		   var birth= $("#birth").val();
+		   var targetScore= $("#targetScore").val();
+		   var testName= $("#lang2").val();
+		   
+		   
+		    var info = {email:email, passwd:passwd,
+		      nickname:nickname, name:name,
+		      passwd:passwd,phoneNumber:phoneNumber,
+		      phoneNumber2:phoneNumber2,phoneNumber3:phoneNumber3,
+		      introdution:introdution,birth:birth,
+		      targetScore:targetScore,testName:testName
+		   };
     
    
-     $.ajax({
-    type : "post",
-    url : "/member/registdb",
-    data: info,
-    success : function(message) {
-     $("#result").html(message);
-     $("#myModal").modal();
-    },
-    error : function(xhr, status, error){ //콜백함수 형식으로 에러가 났을경우 404 , 500등을 처리해주는부분.
-        alert(xhr + "("+xhr.status+", "+error+")");
-       }
-    }); 
-  });  
-  
+		   $.ajax({
+			    type : "post",
+			    url : "/member/registdb",
+			    data: info,
+			    success : function(message) {
+			     	$("#result").html(message);
+			    	 $("#myModal").modal();
+			    },
+			    error : function(xhr, status, error){ //콜백함수 형식으로 에러가 났을경우 404 , 500등을 처리해주는부분.
+			        alert(xhr + "("+xhr.status+", "+error+")");
+			    }
+		   }); 
+	  });  
  });
     
 </script>

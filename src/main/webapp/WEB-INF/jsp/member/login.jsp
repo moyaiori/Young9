@@ -25,7 +25,7 @@
 			 	/* 	$("#contentFile").load("template/template", contentFile); */
 				},
 				error : function(data){
-					alert("실패");
+					alert("data:"+data);
 				}
 			});
 		});
