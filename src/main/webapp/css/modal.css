@@ -1,0 +1,30 @@
+.arrow_box {
+	position: relative;
+	background: #d5d5d5;
+	border: 2px solid #f5f5f5;
+	 -moz-border-radius: 10px;  
+     -webkit-border-radius: 10px;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 5%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(213, 213, 213, 0);
+	border-bottom-color: #d5d5d5;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(245, 245, 245, 0);
+	border-bottom-color: #f5f5f5;
+	border-width: 10px;
+	margin-left: -10px;
+}

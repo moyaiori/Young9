@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.kosta.binning.young9.study.dao.StudyGroupDao">
+	<!-- 모임 추가 -->
+	<insert id="insert" parameterType="kr.or.kosta.binning.young9.study.domain.StudyGroup" >
+		INSERT INTO study_group(study_group_id, target_test_name, group_name, recruit_count, recruit_start_date, recruit_end_date, study_start_date, study_end_date, target_score, group_introdution, group_owner, daily_word_count, recruit_state, daily_count)
+        VALUES(group_id_seq.NEXTVAL, #{targetTestName}, #{groupName}, #{recruitCount}, #{recruitStartDate}, #{recruitEndDate}, #{studyStartDate}, #{studyEndDate}, #{targetScore}, #{groupIntrodution}, #{groupOwner} , #{dailyWordCount}, 'recruit', 0)
+	</insert>
+	
+	<!-- 가장 최근 아이 가져오긔 -->
+	<select id="getRecent" resultType="kr.or.kosta.binning.young9.study.domain.StudyGroup"> 
+	 	SELECT study_group_id AS "studyGroupId", target_test_name AS "targetTestName", group_name AS "groupName", recruit_count AS "recruitCount", recruit_start_date AS "recruitStartDate", recruit_end_date AS "recruitEndDate", study_start_date AS "studyStartDate", study_end_date AS "studyEndDate", target_score AS "targetScore", group_introdution AS "groupIntrodution", group_owner AS "groupOwner", daily_word_count AS "dailyWordCount", recruit_state AS "recruitState", daily_count AS "dailyCount"
+		FROM study_group
+		WHERE rownum = 1
+		ORDER BY study_group_id DESC
+	</select>
+	
+	<!-- 모임에 아이를 추가하긔 -->
+	<insert id="join" parameterType="java.util.HashMap">
+		INSERT INTO group_member(study_group_id, email, nickname, group_name)
+		VALUES(#{studyGroupId}, #{email}, #{nickname}, #{groupName})
+	</insert>
+	
+	<select id="getMyGroup" parameterType="java.lang.Integer" resultType="kr.or.kosta.binning.young9.study.domain.StudyGroup">
+		SELECT study_group_id AS "studyGroupId", target_test_name AS "targetTestName", group_name AS "groupName", recruit_count AS "recruitCount", recruit_start_date AS "recruitStartDate", recruit_end_date AS "recruitEndDate", study_start_date AS "studyStartDate", study_end_date AS "studyEndDate", target_score AS "targetScore", group_introdution AS "groupIntrodution", group_owner AS "groupOwner", daily_word_count AS "dailyWordCount", recruit_state AS "recruitState", daily_count AS "dailyCount"
+		FROM study_group
+		WHERE study_group_id = #{value}
+	</select>
+	
+	<select id="getMyMember" parameterType="java.lang.Integer" resultType="kr.or.kosta.binning.young9.study.domain.GroupMember">
+		SELECT study_group_id AS "studyGroupid", group_name AS "groupName", email, nickname
+		FROM group_member
+		WHERE study_group_id = #{value}
+	</select>
+</mapper>

@@ -1,0 +1,32 @@
+.header{
+	
+	text-align:center; 
+	font-size: 30px; 
+	font-weight:bold;
+	vertical-align: middle;
+	
+}
+
+.fontstyle{
+	
+	text-align:center; 
+	font-size: 20px; 
+	font-weight:bold;
+	vertical-align: middle;
+	
+}
+
+.subfontstyle{
+	
+	text-align:center; 
+	font-size: 14px; 
+	font-weight:bold;
+	vertical-align: middle;
+	
+}
+
+.table{
+	background-color: white;
+	vertical-align: middle;
+}
+
