@@ -31,5 +31,8 @@ public interface MemberDao {
 	public Member getMyInfo(String email) throws RuntimeException;
 	
 	/** 모임 탈퇴 */
-	public void exit(String nickname) throws RuntimeException;
+	public void exit(String email) throws RuntimeException;
+	
+	/** 모임 강퇴 */
+	public void kick(String nickname) throws RuntimeException;
 }

@@ -25,6 +25,15 @@
 	
 }
 
+.subfont{
+	width:30px;
+	text-align:right; 
+	font-size: 8px; 
+	font-weight:bold;
+	vertical-align: middle;
+	
+}
+
 .table{
 	background-color: white;
 	vertical-align: middle;

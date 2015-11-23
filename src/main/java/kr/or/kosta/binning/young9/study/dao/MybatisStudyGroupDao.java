@@ -32,7 +32,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 	
-	// 그룹 추가
+	/** 그룹 추가 */
 	@Override
 	public void insert(StudyGroup studyGroup) throws RuntimeException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -49,6 +49,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		}
 	}
 	
+	/** 최근 등록된 모임 가져오기(바로 가져와서 단어를 등록해야하기 때문에 사용한다) */
 	@Override
 	public StudyGroup getRecent() throws RuntimeException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -65,7 +66,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		
 		return group;
 	}
-
+	
 	@Override
 	public List<StudyGroup> search(Map<String, Object> searchData) throws RuntimeException {
 		List<StudyGroup> list = null;
@@ -81,6 +82,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		return list;
 	}
 	
+	/** 모임에 가입 메소드 */
 	@Override
 	public void join(HashMap<String, Object> data) throws RuntimeException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -98,7 +100,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		
 	}
 	
-	// 자신의 모임 가져오긔
+	/** 자신의 모임 정보를 가져오는 메소드 */
 	@Override
 	public StudyGroup getMyGroup(int studyGroupId) throws RuntimeException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -116,7 +118,7 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		return group;
 	}
 	
-	// 자신의 모임 맴버 가져오긔
+	/** 자신이 포함된 모임의 맴버를 모두 가져온다 */
 	@Override
 	public List<GroupMember> getMyMember(int studyGroupId) throws RuntimeException {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -132,6 +134,39 @@ public class MybatisStudyGroupDao implements StudyGroupDao {
 		}
 		
 		return groupMember;
+	}
+	
+	/** 모임을 탈퇴하는 메소드 */
+	@Override
+	public void exit(String email) throws RuntimeException {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			StudyGroupDao groupDao = sqlSession.getMapper(StudyGroupDao.class);
+			groupDao.exit(email);
+			sqlSession.commit();
+		} catch (Exception e) {
+			logger.warn("[WARN] : StudyGroupDao -> exit()에서 발생");
+			sqlSession.rollback();
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Override
+	public void kick(String nickname) throws RuntimeException {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			StudyGroupDao groupDao = sqlSession.getMapper(StudyGroupDao.class);
+			groupDao.kick(nickname);
+			sqlSession.commit();
+		} catch (Exception e) {
+			logger.warn("[WARN] : StudyGroupDao -> kick()에서 발생");
+			sqlSession.rollback();
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
 	}
 	
 }

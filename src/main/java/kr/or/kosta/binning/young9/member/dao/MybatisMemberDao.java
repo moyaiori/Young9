@@ -62,7 +62,7 @@ public class MybatisMemberDao implements MemberDao {
 		}
 	}
 	
-	// 모임만들때 모임장의 스터디아이디 변경
+	/** 모임만들때 모임장의 스터디아이디 변경 */
 	@Override
 	public void updateStudyId(Member member) throws RuntimeException {
 		SqlSession session = null;
@@ -80,6 +80,7 @@ public class MybatisMemberDao implements MemberDao {
 		}
 	}
 	
+	/** 나의 정보를 얻는 메소드 */
 	@Override
 	public Member getMyInfo(String email) throws RuntimeException {
 		Member member = null;
@@ -96,16 +97,35 @@ public class MybatisMemberDao implements MemberDao {
 		return member;
 	}
 	
+	/** 모임 탈퇴 메소드 */
 	@Override
-	public void exit(String nickname) throws RuntimeException {
+	public void exit(String email) throws RuntimeException {
 		SqlSession session = null;
 		try{
 			session = sqlSessionFactory.openSession();
 			MemberDao dao = session.getMapper(MemberDao.class);
-			dao.exit(nickname);
+			dao.exit(email);
 			session.commit();
 		}catch (Exception e) {
 			logger.warn("[WARN] MemberDao -> exit()");
+			logger.warn(e.toString());
+			session.rollback();
+		}finally{
+			session.close();
+		}
+	}
+	
+	/** 모임 가오티 */
+	@Override
+	public void kick(String nickname) throws RuntimeException {
+		SqlSession session = null;
+		try{
+			session = sqlSessionFactory.openSession();
+			MemberDao dao = session.getMapper(MemberDao.class);
+			dao.kick(nickname);
+			session.commit();
+		}catch (Exception e) {
+			logger.warn("[WARN] MemberDao -> kick()");
 			logger.warn(e.toString());
 			session.rollback();
 		}finally{

@@ -13,8 +13,18 @@ hr {
 </style>
 <script>
 	$(function(){
-		$("#exit").click(function(){
-			$(location).attr("href", "../");
+		$("#exitButton").click(function(){
+			$.ajax({
+				type : "post",
+				url : "/study/exitProc",
+				success : function(message){
+					$("#result").html(message);
+				    $("#myModal").modal();
+				},
+				error : function(){
+					alert("실패");
+				}
+			});
 		});
 	});
 </script>
@@ -33,7 +43,7 @@ hr {
 <font class="j_txt"> 정말로 </font>탈퇴하시겠습니깡....??</p>
 <br>
 <br>
-<button id="exit" class="btn btn-danger">탈퇴하기</button>
+<button id="exitButton" class="btn btn-danger">탈퇴하기</button>
 <button class="btn btn-danger">취소</button>
-
 </div>
+<jsp:include page="../popup/modal.jsp"/>

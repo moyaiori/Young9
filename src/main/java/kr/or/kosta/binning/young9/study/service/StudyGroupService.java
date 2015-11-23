@@ -27,4 +27,9 @@ public interface StudyGroupService {
 	/** 자신의 모임 멤버 가져오긔 */
 	public List<GroupMember> getMyMember(int studyGroupId) throws RuntimeException;
 	
+	/** 모임 탈퇴 메소드 */
+	public void exit(String email) throws RuntimeException;
+	
+	/** 모임 강퇴 메소드 */
+	public void kick(String nickname) throws RuntimeException;
 }

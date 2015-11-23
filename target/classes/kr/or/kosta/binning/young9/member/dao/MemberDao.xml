@@ -41,7 +41,13 @@
 	<update id="exit" parameterType="java.lang.String">
 		UPDATE members
 		SET study_group_id = null
-		WHERE nickname = #{nickname}
+		WHERE email = #{email}
 	</update>
 	
+	<!-- 강퇴 당함 -->
+	<update id="kick" parameterType="java.lang.String">
+		UPDATE members
+		SET study_group_id = null
+		WHERE nickname = #{nickname}
+	</update>	
 </mapper>
