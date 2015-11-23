@@ -20,11 +20,12 @@
 			 output += String(count);
 			 output += "</td>";
 			 output += "<td>";
-			 output += "<input type='text' name='word'>";
+			 output += "<input type='text' name='word' class='form-control' style='width:200px;'>";
 			 output += "</td>";
-			 output += "<td>";
-			 output += "<input type='text' name='means'>";
+			 output += "<td colspan='2'>";
+			 output += "<input type='text' name='means' class='form-control' style='width:200px;'>";
 			 output += "</td>";
+			
 			 output += "</tr>";
 			 
 			 $("#wordBody").append(output);
@@ -55,11 +56,11 @@
 		<table class="table">
 			<tr>
 				<td class="subfontstyle" >모임명</td>
-				<td colspan="4"><input type="text" class=""  name="groupName" style="width: 100%"></td>
+				<td colspan="4"><input type="text" class="form-control"  name="groupName" style="width: 100%"></td>
 			</tr>
 			<tr>
 				<td class="subfontstyle" >모집인원</td>
-				<td colspan="4"><input type="number"  class=""  min="4" max="10" name="recruitCount"></td>
+				<td ><input type="number"  class="form-control"  min="4" max="10" name="recruitCount" style="width: 55%"></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -67,10 +68,10 @@
 			</tr>
 			<tr>
 				<td class="subfontstyle" >모집기간</td>
-				<td>시작일</td>
-				<td><input type="date" name="RecruitStartDate"  class="" style="width: 150px"  ></td>
-				<td>마감일</td>
-				<td><input type="date" name="RecruitEndDate"  class=""  style="width: 150px" ></td>
+				<td class="subfont">시작일</td>
+				<td><input type="date" name="RecruitStartDate"  class="form-control" style="width: 150px"  ></td>
+				<td class="subfont">마감일</td>
+				<td><input type="date" name="RecruitEndDate"  class="form-control"  style="width: 150px" ></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -78,10 +79,10 @@
 			</tr>
 			<tr>
 				<td class="subfontstyle" >스터디기간</td>
-				<td>시작일</td>
-				<td><input type="date" name="StudyStartDate"  class="" style="width: 150px" ></td>
-				<td>마감일</td>
-				<td><input type="date" name="StudyEndDate"  class=""  style="width: 150px" ></td>
+				<td class="subfont">시작일</td>
+				<td><input type="date" name="StudyStartDate"  class="form-control" style="width: 150px" ></td>
+				<td class="subfont">마감일</td>
+				<td><input type="date" name="StudyEndDate"  class="form-control"  style="width: 150px" ></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -90,7 +91,7 @@
 			<tr>
 				<td class="subfontstyle" >목표분야</td>
 					<td class="form-inline">
-					<select name="targetTestName"  class="" >
+					<select name="targetTestName"  class="form-control" >
 						<option>어학시험</option>			
 						<option>Toeic</option>
 						<option>Opic</option>
@@ -98,12 +99,13 @@
 						<option>생활영어</option>
 						<option>기타</option>
 					</select></td>
-				<td colspan="3"><input type="text"  class=""  name="targetScore" placeholder="목표점수" style="width: 100px"></td>
+				<td colspan="3"><input type="text"  class="form-control"  name="" placeholder="기타선택시" style="width: 100px">
+				<input type="text"  class="form-control"  name="targetScore" placeholder="목표점수" style="width: 100px"></td>
 			</tr>
 			<tr>
 				<td><input type="button" id="insertWord" value="단어 입력" class="btn btn-default"></td>
-				<td>하루할당량</td>
-				<td colspan="3"><input type="text" name="dailyWordCount" class="" style="width: 100px"></td>
+				<td class="subfont">하루할당량</td>
+				<td colspan="3"><input type="text" name="dailyWordCount" class="form-control" style="width: 100px"></td>
 			</tr>
 			<tr>
 				<td></td>		
@@ -113,7 +115,7 @@
 			</tr>
 			<tr>
 				<td class="subfontstyle" >모임소개</td>
-				<td colspan="4"><textarea cols="60" rows="10" name="groupIntrodution" style="resize: none"></textarea></td>
+				<td colspan="4"><textarea class="form-control" cols="60" rows="10" name="groupIntrodution" style="resize: none"></textarea></td>
 			</tr>
 			<tr>
 			<td colspan="5" style="text-align: center;"><input  type="submit" class="btn btn-default"  value="확인">　　　<button class="btn btn-default" >취소</button></td>
