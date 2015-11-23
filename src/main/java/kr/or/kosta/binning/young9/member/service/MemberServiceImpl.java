@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
-	// 모임만들기 -> 해당 회원의 스터디아이디 변경
+	/** 모임만들기 -> 해당 회원의 스터디아이디 변경 */
 	@Override
 	public void updateStudyId(Member member) throws RuntimeException {
 		try {
@@ -57,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	/** 디비에서 나의 정보를 가져온다 */
 	@Override
 	public Member getMyInfo(String email) throws RuntimeException {
 		Member member = null;
@@ -68,9 +69,23 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 	
+	/** 회원 탈퇴 */
 	@Override
-	public void exit(String nickname) throws RuntimeException {
-		
-		
+	public void exit(String email) throws RuntimeException {
+		try{
+			memberDao.exit(email);
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/** 회원 강퇴 */
+	@Override
+	public void kick(String nickname) throws RuntimeException {
+		try{
+			memberDao.kick(nickname);
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
 	}
 }

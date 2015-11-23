@@ -29,7 +29,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		this.studyGroupDao = studyGroupDao;
 	}
 
-	// 스터디그룹 등록 메소드 구현
+	/** 스터디그룹 등록 메소드 구현 */
 	@Override
 	public void insert(StudyGroup studyGroup) throws RuntimeException {
 		try {
@@ -39,7 +39,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		}
 	}
 	
-	// 최근 등록된 아이 가져오기
+	/** 최근 등록된 모임 가져오기(단어 등록을 위해 사용한다) */
 	@Override
 	public StudyGroup getRecent() throws RuntimeException {
 		StudyGroup group = null;
@@ -58,6 +58,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return studyGroupDao.search(searchData);
 	}
 	
+	/** 모임 가입 메소드(모임장이 사용한다) */
 	@Override
 	public void join(HashMap<String, Object> data) throws RuntimeException {
 		try {
@@ -67,6 +68,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		}
 	}
 	
+	/** 내 그룹정보를 얻어 온다 */
 	@Override
 	public StudyGroup getMyGroup(int studyGroupId) throws RuntimeException {
 		StudyGroup group = null;
@@ -79,6 +81,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return group;
 	}
 	
+	/** 내가 소속된 그룹의 맴버들을 모두 가져온다 */
 	@Override
 	public List<GroupMember> getMyMember(int studyGroupId) throws RuntimeException {
 		List<GroupMember> groupMember = null;
@@ -89,5 +92,24 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 			throw new RuntimeException(e.toString());
 		}
 		return groupMember;
+	}
+	
+	/** 탈퇴 메소드 구현 */
+	@Override
+	public void exit(String email) throws RuntimeException {
+		try {
+			studyGroupDao.exit(email);
+		} catch (Exception e) {
+			throw new RuntimeException(e.toString());
+		}
+	}
+	
+	@Override
+	public void kick(String nickname) throws RuntimeException {
+		try {
+			studyGroupDao.kick(nickname);
+		} catch (Exception e) {
+			throw new RuntimeException(e.toString());
+		}
 	}
 }

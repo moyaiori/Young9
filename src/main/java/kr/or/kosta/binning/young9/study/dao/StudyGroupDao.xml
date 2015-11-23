@@ -34,4 +34,15 @@
 		FROM group_member
 		WHERE study_group_id = #{value}
 	</select>
+	
+	<delete id="exit" parameterType="java.lang.String">
+		DELETE FROM group_member
+		WHERE email = #{email}
+	</delete>
+	
+	<delete id="kick" parameterType="java.lang.String">
+		DELETE FROM group_member
+		WHERE nickname = #{nickname}
+	</delete>
+	
 </mapper>

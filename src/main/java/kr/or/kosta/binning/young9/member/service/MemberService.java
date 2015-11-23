@@ -7,12 +7,15 @@ public interface MemberService {
 
 	public void regist(Member member) throws RuntimeException;
 	
-	// 모임 만들 때 모임장의 스터디그룹 아이디 업데이트
+	/** 모임 만들 때 모임장의 스터디그룹 아이디 업데이트 */
 	public void updateStudyId(Member member) throws RuntimeException;
 	
-	// 내정보 가져오긔
+	/** 내정보 가져오긔 */
 	public Member getMyInfo(String email) throws RuntimeException;
 	
-	// 모임 탈퇴라능
-	public void exit(String nickname) throws RuntimeException;
+	/** 모임 탈퇴라능 */
+	public void exit(String email) throws RuntimeException;
+	
+	/** 모임 강퇴 */
+	public void kick(String nickname) throws RuntimeException;
 }

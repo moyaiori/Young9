@@ -31,4 +31,10 @@ public interface StudyGroupDao {
 	
 	/** 자신의 모임 멤버 가져오긔 */
 	public List<GroupMember> getMyMember(int studyGroupId) throws RuntimeException;
+	
+	/** 모임탈퇴 처리 메소드 */
+	public void exit(String email) throws RuntimeException;
+	
+	/** 강퇴 처리 메소드 */
+	public void kick(String nickname) throws RuntimeException;
 }

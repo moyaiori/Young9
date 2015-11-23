@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.or.kosta.binning.young9.member.domain.Member;
 import kr.or.kosta.binning.young9.member.service.MemberService;
 import kr.or.kosta.binning.young9.study.domain.GroupMember;
@@ -91,27 +93,27 @@ public class StudyGroupController {
 		return null;
 	}
 	
-	// 만들기 화면 페이지 이동
+	/** 만들기 화면 페이지 이동 */
 	@RequestMapping("/create")
 	public String create(Model model){
 		model.addAttribute("contentFile", "../createStudy/create.jsp");
 		return "template/template";
 	}
 	
-	// ㄹㅇ 만들긔
+	/** 모임만들기 메소드 */
 	@RequestMapping("/createProc")
 	public String createProc(Model model, @ModelAttribute("studyGroup") StudyGroup studyGroup, HttpServletRequest request, @CookieValue(value="loginInfo", required=false) String loginInfo){
 		
-		// 쿠키정보라능(이메일과 닉네임이 들어있다능)
+		/**  쿠키정보라능(이메일과 닉네임이 들어있다능) */
 		String [] info = loginInfo.split(",");
 		
-		// 닉네임 셋팅
+		/** 닉네임 셋팅 */
 		studyGroup.setGroupOwner(info[1]); 
 		
-		//스터디 그룹 등록
+		/* 스터디 그룹 등록 */
 		studyGroupService.insert(studyGroup);
 		
-		// 가장 최근 스터디그룹 가져옴
+		/** 가장 최근 스터디그룹 가져옴 */
 		StudyGroup group = studyGroupService.getRecent();
 		
 		/* JSON텍스트 형태로 오는 데이터를 파싱 */
@@ -125,7 +127,7 @@ public class StudyGroupController {
 			e.printStackTrace();
 		}
 		
-		/* 단어 생성 */
+		/** 단어 생성 */
 		JSONArray array = (JSONArray) obj;
 		for (int i = 0; i < array.size(); i++) {
 			JSONObject jsonObj = (JSONObject)array.get(i);
@@ -136,7 +138,7 @@ public class StudyGroupController {
 			wordsService.add(word);
 		}
 		
-		// 모임 만든 아이 소속 모임에 포함
+		/** 모임 만든 아이 소속 모임에 포함 */
 		HashMap<String , Object> data = new HashMap<String, Object>();
 		data.put("studyGroupId", group.getStudyGroupId());
 		data.put("email", info[0]);
@@ -144,43 +146,70 @@ public class StudyGroupController {
 		data.put("groupName", group.getGroupName());		
 		studyGroupService.join(data);
 		
-		// 모임만든아이 소속 변경
+		/** 모임만든아이 소속 변경 */
 		Member member = new Member(info[0], info[1]);
 		member.setStudyGroupId(group.getStudyGroupId());
 		memberService.updateStudyId(member);
 		
-		// 나중에 게시판도 생성해야 될거같아욤(2015-11-22 유안상올림)
+		/** 나중에 게시판도 생성해야 될거같아욤(2015-11-22 유안상올림) */
 		
 		model.addAttribute("contentFile", "../createStudy/detail.jsp");
 		return "template/template";
 	}
 	
+	/** 탈퇴 화면 이동 */
 	@RequestMapping("/exit")
 	public String exit(Model model){
 		model.addAttribute("contentFile", "../myStudy/exit.jsp");
 		return "template/template";
 	}
 	
-	@RequestMapping("/exitProc")
-	public void exitProc(@CookieValue(value="loginInfo", required=false) String loginInfo){
-		// 맴버의 상태 변경
+	/** 탈퇴 처리 메소드 */
+	@RequestMapping(value = "/exitProc", produces="text/plain;charset=UTF-8", method=RequestMethod.POST)
+	public @ResponseBody String exitProc(Model model, @CookieValue(value="loginInfo", required=false) String loginInfo){
 		
+		/** 쿠키의 정보(닉네임) 저장 */
+		String email = loginInfo.split(",")[0];
 		
-		// 그룹 멤버 테이블 변경
+		/** 맴버의 상태 변경(소속을 없앤다) */
+		memberService.exit(email);
+		
+		/** 그룹 멤버 테이블 변경(탈퇴 신청한 아이를 지운다) */
+		studyGroupService.exit(email);
+		
+		return "회원탈퇴가 완료되었습니다.";
 	}
 	
+	/** 강퇴 화면 이동 */
 	@RequestMapping("/kick")
 	public String kick(Model model, @CookieValue(value="loginInfo", required=false) String loginInfo){
+		
 		model.addAttribute("contentFile", "../myStudy/kick.jsp");
 		
 		Member member = memberService.getMyInfo(loginInfo.split(",")[0]);
 		
 		List<GroupMember> groupMember = studyGroupService.getMyMember(member.getStudyGroupId());
-		
 		model.addAttribute("groupMember", groupMember);
-		
 		return "template/template";
 	}
+	
+	/** 강퇴 실행 */
+	@RequestMapping(value = "/kickProc", produces="text/plain;charset=UTF-8", method=RequestMethod.POST)
+	public @ResponseBody String kickProc(Model model){
+		
+		
+		
+		
+		/** 맴버의 상태 변경(소속을 없앤다) */
+		
+		
+		/** 그룹 멤버 테이블 변경(탈퇴 신청한 아이를 지운다) */
+		
+		
+		
+		return "강퇴가 완료되었습니다.";
+	}
+	
 	
 	@RequestMapping("/studyinfo")
 	public String studyInfo(Model model, @CookieValue(value="loginInfo", required=false) String loginInfo){

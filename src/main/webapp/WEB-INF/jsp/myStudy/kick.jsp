@@ -1,19 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
- <link rel="stylesheet" type="text/css" href="../style/bootstrap-theme.css">
-<link rel="stylesheet" type="text/css" href="../style/bootstrap-theme.css.map">
-<link rel="stylesheet" type="text/css" href="../style/bootstrap-theme.min.css">
-<link rel="stylesheet" type="text/css" href="../style/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="../style/bootstrap.css.map">
-<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../style/header.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 hr { 
     display: block;
@@ -25,25 +11,34 @@ hr {
     border-width: 1px;
     width: 30%
 }
-
-
 </style>
-
-
-
-
-<title></title>
-</head>
-<body>
-
-<Br>
+<script>
+$(function(){
+	$("#kickButton").click(function(){
+		
+		var select = $("option:selected").val();
+		
+		$.ajax({
+			type : "post",
+			url : "/study/kickProc",
+			data : select,
+			success : function(message){
+				$("#result").html(message);
+			    $("#myModal").modal();
+			},
+			error : function(){
+				alert("실패");
+			}
+		});
+	});
+});
+</script>
 <br>
-
+<br>
 <p class="j_p"  align="center">
 
-				<font class="j_txt"> 강퇴!!!</font><hr></p>
-				
-<Br>
+<font class="j_txt"> 강퇴!!!</font><hr>			
+<br>
 <div class="container" style="margin:0px auto" align="center" >
 
 <p class="j_p" style="margin-bottom: 40px">
@@ -60,7 +55,6 @@ hr {
 <Br>
 </div>
 <div class="container" style="margin:0px auto" align="center" >
-<button class="btn btn-danger">강퇴하기</button>
-	</div>
-</body>
-</html>
+<button id="kickButton" class="btn btn-danger">강퇴하기</button>
+</div>
+<jsp:include page="../popup/modal.jsp"/>
